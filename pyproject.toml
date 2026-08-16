@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentic-security-governance-runtime"
+version = "0.1.0"
+description = "Enterprise-Grade Sub-5ms AI Governance & Security Interceptor Engine"
+readme = "README.md"
+authors = [
+    { name = "Antigravity AI Governance Team", email = "governance@antigravity.ai" }
+]
+license = { text = "Apache-2.0" }
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.0.0",
+    "cryptography>=41.0.0",
+    "requests>=2.28.0",
+    "numpy>=1.22.0",
+]
+
+[project.optional-dependencies]
+postgres = [
+    "asyncpg>=0.29.0",
+]
+semantic = [
+    "sentence-transformers>=2.2.0",
+    "numpy>=1.24.0",
+]
+otel = [
+    "opentelemetry-api>=1.20.0",
+    "opentelemetry-sdk>=1.20.0",
+]
+all = [
+    "agentic-security-governance-runtime[postgres,semantic,otel]",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.scripts]
+agentic-gov = "agentic_gov.telemetry.exporter:cli_main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
